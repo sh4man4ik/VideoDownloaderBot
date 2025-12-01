@@ -1,26 +1,31 @@
 import { Telegraf } from 'telegraf';
 import { message } from 'telegraf/filters';
 import { YtDlp } from 'ytdlp-nodejs';
+import ffmpeg from 'ffmpeg-static';
 import fs from 'fs/promises';
 import 'dotenv/config';
-import ffmpeg from 'ffmpeg-static';
 
+// setup
 const ytdlp = new YtDlp({
 	ffmpegPath: ffmpeg
 });
-
 const bot = new Telegraf(process.env.BOT_TOKEN);
 
+// bot responses
 let welcomeText =
 	'Hi! I am a bot that will help you download any video from social networks! Just send me a link to the video!';
 let helpText = 'Just send me a link to the video!';
 let errorText = 'Oops! Something went wrong!';
+let waitText = 'This may take some time!';
 
+// bot commands
 bot.start((ctx) => ctx.reply(welcomeText));
 
 bot.help((ctx) => ctx.reply(helpText));
 
 bot.on(message('text'), async (ctx) => {
+	ctx.reply(waitText);
+
 	let videoName = createRandomVideoName(12);
 
 	try {
@@ -45,6 +50,7 @@ bot.on(message('text'), async (ctx) => {
 	}
 });
 
+// generating a random name for a video
 function createRandomVideoName(sumString) {
 	const symbolArray = '1234567890qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM';
 	let randomString = '';
@@ -57,4 +63,5 @@ function createRandomVideoName(sumString) {
 	return randomString;
 }
 
+// bot launch
 bot.launch();
