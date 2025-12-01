@@ -8,6 +8,7 @@ const ytdlp = new YtDlp({
 	binaryPath: './bin/yt-dlp.exe',
 	ffmpegPath: './bin/ffmpeg.exe'
 });
+
 const bot = new Telegraf(process.env.BOT_TOKEN);
 
 let welcomeText =
