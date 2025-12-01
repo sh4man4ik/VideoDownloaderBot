@@ -3,10 +3,10 @@ import { message } from 'telegraf/filters';
 import { YtDlp } from 'ytdlp-nodejs';
 import fs from 'fs/promises';
 import 'dotenv/config';
+import ffmpeg from 'ffmpeg-static';
 
 const ytdlp = new YtDlp({
-	binaryPath: './bin/yt-dlp.exe',
-	ffmpegPath: './bin/ffmpeg.exe'
+	ffmpegPath: ffmpeg
 });
 
 const bot = new Telegraf(process.env.BOT_TOKEN);
