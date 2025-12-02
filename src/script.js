@@ -15,8 +15,8 @@ const bot = new Telegraf(process.env.BOT_TOKEN);
 let welcomeText =
 	'Hi! I am a bot that will help you download any video from social networks! Just send me a link to the video!';
 let helpText = 'Just send me a link to the video!';
-let errorText = 'Oops! Something went wrong!';
 let waitText = 'This may take some time!';
+let errorText = 'Oops! Something went wrong!';
 
 // bot commands
 bot.start((ctx) => ctx.reply(welcomeText));
@@ -37,7 +37,9 @@ bot.on(message('text'), async (ctx) => {
 			},
 			output: `./${videoName}.mp4`,
 			onProgress: (progress) => {
-				console.log(progress);
+				console.log(
+					`status: ${progress.status}\n${progress.downloaded_str} of ${progress.total_str} (${progress.percentage_str})\n`
+				);
 			}
 		});
 
