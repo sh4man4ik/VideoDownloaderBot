@@ -1,5 +1,3 @@
-# VideoDownloaderBot
-
 # What is it?
 
 This is a Telegram Bot that helps you download videos from any social network. All you have to do is send the bot a link
@@ -33,7 +31,7 @@ npm install
 
 Launch the bot:
 
-```'
+```
 node src/script.js
 ```
 
